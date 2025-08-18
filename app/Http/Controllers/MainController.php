@@ -8,7 +8,11 @@ class MainController extends Controller
 {
     public function index()
     {
-        return view('main.index');
+        //load user's notes
+
+
+        //load home view
+        return view('home');
     }
 
     public function newNote()

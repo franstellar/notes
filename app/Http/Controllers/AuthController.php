@@ -64,8 +64,8 @@ class AuthController extends Controller
             ]
         ]);
         
-        echo '<pre>';
-        print_r($user);
+        //redirect to notes page
+        return redirect()->to('/');
     }
 
     public function logout()
