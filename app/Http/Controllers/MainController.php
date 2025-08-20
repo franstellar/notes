@@ -2,18 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Services\Operations;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use PhpParser\Node\Stmt\TryCatch;
 
 class MainController extends Controller
 {
     public function index()
     {
-        return view('main.index');
+        //load user's notes
+        $id = session('user.id');
+        $notes = User::find($id)->notes()->get()->toArray();
+
+        //load home view
+        return view('home', ['notes' => $notes]);
     }
 
     public function newNote()
     {
-        return view('main.about');
+        return view('home');
     }
 
+    public function editNote($id)
+    {
+        $id = Operations::decryptId($id);
+    }
+
+    public function deleteNote($id)
+    {
+        $id = Operations::decryptId($id);
+    }
 }
